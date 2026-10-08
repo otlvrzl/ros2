@@ -1,0 +1,81 @@
+https://docs.ros.org/en/lyrical/First-Steps.html
+
+https://docs.ros.org/en/lyrical/Developer-Tools/Build/Run-2-nodes-in-single-or-separate-docker-containers.html
+
+!!!!!!!!!!!!!!!! Run before start !!!!!!!!!!!
+source /opt/ros/lyrical/setup.bash
+
+---
+sudo docker run -it --rm \
+  --network host \
+  --ipc=host \
+  --name ros2_turtlesim \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  -v $HOME/.Xauthority:/root/.Xauthority:rw \
+  my_ros2_1
+
+ros2 run turtlesim turtlesim_node
+---
+
+sudo docker run -it --rm \
+  --network host \
+  --ipc=host \
+  --name ros2_teleop \
+  my_ros2_1
+
+ros2 run turtlesim turtle_teleop_key
+ros2 node list
+
+
+sudo docker run -it --rm \
+  --network host \
+  --ipc=host \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  -v $HOME/.Xauthority:/root/.Xauthority:rw \
+  my_ros2_1
+
+---
+
+ros2 service call /spawn turtlesim_msgs/srv/Spawn "{x: 1.0, y: 1.0, theta: 0.0}"
+
+----
+docker-compose.yml
+
+yamlversion: '3.8'
+
+services:
+  turtlesim:
+    image: my_ros2_1
+    container_name: ros2_turtlesim
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ~/.Xauthority:/root/.Xauthority:rw
+    command: ros2 run turtlesim turtlesim_node
+    restart: unless-stopped
+
+  teleop:
+    image: my_ros2_1
+    container_name: ros2_teleop
+    network_mode: host
+    ipc: host
+    stdin_open: true # Allows keyboard input
+    tty: true        # Enables interactive terminal control
+    command: ros2 run turtlesim turtle_teleop_key
+    depends_on:
+      - turtlesim
+
+
+bash xhost +local:root
+
+sudo docker compose up
+
+----
+
+https://docs.ros.org/en/lyrical/First-Steps.html#learn-about-fundamental-concepts-behind-ros
+
