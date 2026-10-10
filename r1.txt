@@ -79,3 +79,6 @@ sudo docker compose up
 
 https://docs.ros.org/en/lyrical/First-Steps.html#learn-about-fundamental-concepts-behind-ros
 
+====
+
+sudo docker cp ./launch.py ros2_turtlesim:/ros2/launch.py 

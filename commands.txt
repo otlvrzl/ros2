@@ -1,0 +1,60 @@
+ros2 action list -t
+
+ros2 action type /turtle1/rotate_absolute
+
+ros2 action info /turtle1/rotate_absolute
+
+
+ros2 action send_goal /turtle1/rotate_absolute turtlesim_msgs/action/RotateAbsolute "{theta: 1.57}"
+
+ros2 action send_goal /turtle1/rotate_absolute turtlesim_msgs/action/RotateAbsolute "{theta: -1.57}"
+
+ros2 action send_goal /turtle1/rotate_absolute  turtlesim_msgs/action/RotateAbsolute "{theta: 3.14}" --feedback
+
+
+===
+
+ros2 topic hz /turtle1/pose
+
+## Hit the wall 
+ros2 topic pub -r 1 /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}"
+
+
+## Go in rounds 
+ros2 topic pub -r 1 /turtlesim1/turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: -1.8}}"
+
+===
+
+ros2 interface show turtlesim_msgs/action/RotateAbsolute
+
+
+===
+
+ros2 node info /teleop_turtle
+
+ros2 node info /turtlesim
+
+===
+
+ros2 service call /spawn turtlesim_msgs/srv/Spawn "{x: 1.0, y: 1.0, theta: 0.0}"
+
+===
+
+ros2 param list
+
+ros2 param dump /turtlesim > turlesim1.yaml
+
+ros2 param get background_g
+
+ros2 param set /turtlesim background_g 151
+
+====
+
+ros2 run action_tutorials_cpp fibonacci_action_server --ros-args -p action_server_configure_introspection:=contents
+ros2 run action_tutorials_py fibonacci_action_client --ros-args -p action_client_configure_introspection:=contents
+
+ros2 action echo /fibonacci example_interfaces/action/Fibonacci --flow-style
+
+====
+
+ros2 launch turtlesim multisim.launch.py
