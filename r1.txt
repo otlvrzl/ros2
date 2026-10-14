@@ -94,3 +94,22 @@ sudo docker run -it --rm \
   -v $HOME/.Xauthority:/root/.Xauthority:rw \
   -v /home/user/Documents/repos/ros2_ws:/ros2_ws \
   my_ros2_1
+
+
+===
+# add downloaded files into new Github repo
+# create repo first , my_package for example
+git init 
+git remote add origin https://github.com/otlvrzl/my_package.git
+git remote set-url origin git@github.com:otlvrzl/my_package
+git status
+git add .
+git commit -m "test"
+git push --set-upstream origin master
+
+===
+
+#inside docket container with ROS2 - make sure you can edit files on the host machine
+chown -R ubuntu:ubuntu py_srvcli/
+
+---

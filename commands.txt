@@ -71,3 +71,26 @@ ros2 bag play 0_rosbag2_2026_10_10-15_58_09.mcap
 colcon build --symlink-install
 colcon test
 source install/setup.bash
+
+colcon build --packages-up-to turtlesim
+
+===
+# main underlay
+source /opt/ros/lyrical/setup.bash
+
+cd ros2_ws/
+
+# local overlay, use this to see your local changes - run this command in your workspace directory, i.e. ros2_ws 
+source install/local_setup.bash
+
+===
+
+# Package in a workspace 
+ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name my_node my_package
+
+colcon build --packages-select my_package
+
+===
+# It’s good practice to run rosdep in the root of your workspace (ros2_ws) to check for missing dependencies before building:
+rosdep install -i --from-path src --rosdistro lyrical -y
+
