@@ -75,7 +75,7 @@ source install/setup.bash
 colcon build --packages-up-to turtlesim
 
 ===
-# main underlay
+# main ROS2 underlay 
 source /opt/ros/lyrical/setup.bash
 
 cd ros2_ws/
@@ -91,6 +91,30 @@ ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name my_no
 colcon build --packages-select my_package
 
 ===
-# It’s good practice to run rosdep in the root of your workspace (ros2_ws) to check for missing dependencies before building:
+# It’s good practice to run rosdep in the root of your workspace (ros2_ws) to check/fix missing dependencies before building:
 rosdep install -i --from-path src --rosdistro lyrical -y
+===
+
+#inside docker container with ROS2 - make sure you can edit files on the host machine
+chown -R ubuntu:ubuntu py_srvcli/
+
+# add downloaded files into new Github repo
+# create repo first , my_package for example
+git init 
+git remote add origin https://github.com/otlvrzl/my_package.git
+git remote set-url origin git@github.com:otlvrzl/my_package
+git status
+git add .
+git commit -m "test"
+git push --set-upstream origin master
+
+===
+
+ros2 launch python_parameters python_parameters_launch.py
+
+===
+
+ros2 doctor
+ros2 doctor --report
+
 
