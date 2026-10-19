@@ -93,7 +93,7 @@ sudo docker run -it --rm \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   -v $HOME/.Xauthority:/root/.Xauthority:rw \
   -v /home/user/Documents/repos/ros2_ws:/ros2_ws \
-  my_ros2_1
+  my_ros2_2
 
 
 ===
@@ -109,7 +109,17 @@ git push --set-upstream origin master
 
 ===
 
-#inside docket container with ROS2 - make sure you can edit files on the host machine
+#inside docker container with ROS2 - make sure you can edit files on the host machine
 chown -R ubuntu:ubuntu py_srvcli/
 
 ---
+
+CAD
+PID
+PID gains in ROS2 / Gazebo
+Теория автоматического управления
+SCADA
+
+===
+
+https://eater.net/quaternions

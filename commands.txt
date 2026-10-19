@@ -117,4 +117,8 @@ ros2 launch python_parameters python_parameters_launch.py
 ros2 doctor
 ros2 doctor --report
 
+===
 
+ros2 run tf2_tools view_frames
+ros2 run tf2_ros tf2_echo turtle2 turtle1
+ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz
