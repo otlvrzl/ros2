@@ -75,6 +75,28 @@ source install/setup.bash
 colcon build --packages-up-to turtlesim
 
 ===
+
+sudo docker run -it --rm \
+  --network host \
+  --ipc=host \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  -v $HOME/.Xauthority:/root/.Xauthority:rw \
+  -v /home/user/Documents/repos/ros2_ws:/ros2_ws \
+  my_ros2_3
+
+  sudo docker run -it --rm \
+  --network host \
+  --ipc=host \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  -v $HOME/.Xauthority:/root/.Xauthority:rw \
+  -v /home/user/Documents/repos/second_ros2_ws:/second_ros2_ws \
+  my_ros2_3
+
+
+docker exec -it <container_name_or_id> bash
+
 # main ROS2 underlay 
 source /opt/ros/lyrical/setup.bash
 
@@ -117,8 +139,15 @@ ros2 launch python_parameters python_parameters_launch.py
 ros2 doctor
 ros2 doctor --report
 
+ros2 run rqt_graph rqt_graph
+
 ===
 
 ros2 run tf2_tools view_frames
 ros2 run tf2_ros tf2_echo turtle2 turtle1
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz
+
+=== GAZEBO ====
+
+gz sim shapes.sdf  
+gz sim shapes.sdf  -v 4

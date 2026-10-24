@@ -6,6 +6,10 @@ https://docs.ros.org/en/lyrical/Developer-Tools/Build/Run-2-nodes-in-single-or-s
 source /opt/ros/lyrical/setup.bash
 
 ---
+
+docker image build -t  my_ros2_3 .
+
+---
 sudo docker run -it --rm \
   --network host \
   --ipc=host \
@@ -14,7 +18,7 @@ sudo docker run -it --rm \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   -v $HOME/.Xauthority:/root/.Xauthority:rw \
   -v /home/user/Documents/repos/ros2_ws:/ros2_ws \
-  my_ros2_1
+  my_ros2_3
 
 ros2 run turtlesim turtlesim_node
 ---
@@ -23,7 +27,7 @@ sudo docker run -it --rm \
   --network host \
   --ipc=host \
   --name ros2_teleop \
-  my_ros2_1
+  my_ros2_3
 
 ros2 run turtlesim turtle_teleop_key
 ros2 node list
@@ -35,7 +39,7 @@ sudo docker run -it --rm \
   -e DISPLAY=$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   -v $HOME/.Xauthority:/root/.Xauthority:rw \
-  my_ros2_1
+  my_ros2_3
 
 ---
 
@@ -92,7 +96,7 @@ sudo docker run -it --rm \
   -e DISPLAY=$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   -v $HOME/.Xauthority:/root/.Xauthority:rw \
-  -v /home/user/Documents/repos/ros2_ws:/ros2_ws \
+  -v /home/user/Documents/repos/second_ros2_ws:/second_ros2_ws \
   my_ros2_2
 
 
@@ -119,7 +123,29 @@ PID
 PID gains in ROS2 / Gazebo
 Теория автоматического управления
 SCADA
+Фильтр Кальмана
+  https://habr.com/ru/articles/594249/
+  https://www.youtube.com/watch?v=mYAsKbwqGv0&list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&index=18
+
+Claude for ROS2 and Gazebo swarm of drones vibe coding, also for building robot with photo based guide.
+
+Как работать с паяльной станцией
+  SMD монтаж 
+  Пайка силовых проводов
+  Уроки
+  Анализ качества через Claude по фото? 
+
+Преобразование Фурье 
+
+Создание робота в CAD и экспорт в URDF (с матрицами инерций для каждого элемента)
 
 ===
 
 https://eater.net/quaternions
+
+https://github.com/ros/urdf_tutorial/blob/ros2/README.md
+
+Install cursor + Claude
+How to fund it? 
+
+пакетов навигации, таких как Nav2 в ROS 2
