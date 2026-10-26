@@ -149,3 +149,10 @@ Install cursor + Claude
 How to fund it? 
 
 пакетов навигации, таких как Nav2 в ROS 2
+set up navigation (Nav2) or manipulation (MoveIt2) for your robot
+
+https://gazebosim.org/docs/latest/getstarted/
+https://medium.com/@14sohaibbk97/get-started-with-robotic-simulations-using-ros2-and-gazebo-part-1-59e4d5d04b88
+https://gazebosim.org/docs/ionic/tutorials/
+
+https://www.youtube.com/watch?v=6BLrPppqZ1s

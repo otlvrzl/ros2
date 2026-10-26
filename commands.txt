@@ -148,6 +148,17 @@ ros2 run tf2_ros tf2_echo turtle2 turtle1
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz
 
 === GAZEBO ====
+# Gazebo Jetty (v10.5.0)
+
+#in all terminals
+export GZ_PARTITION=test_partition
+export GZ_IP=127.0.0.1
 
 gz sim shapes.sdf  
 gz sim shapes.sdf  -v 4
+
+Note: Don’t forget to press the play button in the simulation.
+
+gz topic -l
+gz topic -t "/cmd_vel" -m gz.msgs.Twist -p "linear: {x: 0.5}, angular: {z: 0.05}"
+
